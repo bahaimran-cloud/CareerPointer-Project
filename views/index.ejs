@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/Content/app.css' />
-  </head>
+
+  <% include partials/header %> <!-- Include header partial for consistent head section -->
+  <% include partials/main_nav %>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
   </body>
-</html>
+  <% include partials/footer %>
