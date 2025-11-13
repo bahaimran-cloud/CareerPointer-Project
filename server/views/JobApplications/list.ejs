@@ -1,0 +1,35 @@
+<% include ../partials/header %> <!-- Include header partial for consistent head section -->
+<% include ../partials/main_nav %>
+<main class ="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-10">
+            <h1>Job Application</h1>
+            <br>
+            <table class="table table-bordered table-striped table-hover">
+                <!--Header Row-->
+                <tr class="d-flex">
+                    <th class="text-center col-2">Company</th>
+                    <th class="text-center col-2">Position</th>
+                    <th class="text-center col-2">Date Applied</th>
+                    <th class="text-center col-2">Status</th>
+                    <th class="text-center col-2">Location</th>
+                    <th class="text-center col-2">Job Type </th>
+                    <th class="text-center col-2">Notes</th>
+                </tr>
+                <!--for/while loop-->
+                <% for (let count=0; count<applications.length; count++) { %>
+                    <tr class="d-flex">
+                        <th class="text-center col-2"><%= applications[count].company %></th>
+                        <th class="text-center col-2"><%= applications[count].position %></th>
+                        <th class="text-center col-2"><%= applications[count].dateApplied %></th>
+                        <th class="text-center col-2"><%= applications[count].status %></th>
+                        <th class="text-center col-2"><%= applications[count].location %></th>
+                        <th class="text-center col-2"><%= applications[count].jobType %></th>
+                        <th class="text-center col-2"><%= applications[count].notes %></th>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+</main>
+<% include ../partials/footer %>
