@@ -1,0 +1,46 @@
+<% include ../partials/header %> <!-- Include header partial for consistent head section -->
+<% include ../partials/main_nav %> <!-- Include main nav partial for consistent nav section -->
+<!-- Content -->
+ <div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1>Add Job Application</h1>
+
+            <form class="form" method="post">
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" class="form-control" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="position">Position</label>
+                    <input type="text" class="form-control" id="position" name="position" required>
+                </div>
+                <div class="form-group">
+                    <label for="dateApplied">Date Applied</label>
+                    <input type="date" class="form-control" id="dateApplied" name="dateApplied" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" id="status" name="status" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="jobType">Job Type</label>
+                    <input type="text" class="form-control" id="jobType" name="jobType" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <input type="text" class="form-control" id="notes" name="notes" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+ </div>
+
+<% include ../partials/footer %> <!-- Include footer partial for consistent sidebar section -->
