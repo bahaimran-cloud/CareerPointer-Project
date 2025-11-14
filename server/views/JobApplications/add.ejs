@@ -21,7 +21,15 @@
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status" name="status" required>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="" disabled selected>Select status</option>
+                        <option value="Applied">Applied</option>
+                        <option value="Interviewing">Interviewing</option>
+                        <option value="Offered">Offered</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Hired">Hired</option>
+                        <option value="Withdrawn">Withdrawn</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>

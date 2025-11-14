@@ -17,11 +17,19 @@
                 </div>
                 <div class="form-group">
                     <label for="dateApplied">Date Applied</label>
-                    <input type="date" class="form-control" id="dateApplied" name="dateApplied" value="<%= application.dateApplied.toISOString().split('T')[0] %>" required>
+                    <input type="date" class="form-control" id="dateApplied" name="dateApplied" value="<%= application.dateApplied %>" required>
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status" name="status" value="<%= application.status %>" required>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="" disabled <%= !application.status ? 'selected' : '' %>>Select status</option>
+                        <option value="Applied" <%= application.status === 'Applied' ? 'selected' : '' %>>Applied</option>
+                        <option value="Interviewing" <%= application.status === 'Interviewing' ? 'selected' : '' %>>Interviewing</option>
+                        <option value="Offered" <%= application.status === 'Offered' ? 'selected' : '' %>>Offered</option>
+                        <option value="Rejected" <%= application.status === 'Rejected' ? 'selected' : '' %>>Rejected</option>
+                        <option value="Hired" <%= application.status === 'Hired' ? 'selected' : '' %>>Hired</option>
+                        <option value="Withdrawn" <%= application.status === 'Withdrawn' ? 'selected' : '' %>>Withdrawn</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
