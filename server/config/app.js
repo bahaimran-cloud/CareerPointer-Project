@@ -7,12 +7,22 @@ var logger = require('morgan');
 let mongoose = require('mongoose');
 let DB = require('./db');
 
+//ADDED FOR USER AUTHENTICATION
+let session = require('express-session');
+let passport = require('passport');
+passportLocal = require('passport-local'); 
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
+let cors = require('cors');
+var app = express();
+let userModel = require('../models/user');
+let User = userModel.User;
+
+
 var indexRouter = require('../routes/index');
 var usersRouter = require('../routes/users');
 
 let ApplicationRouter = require('../routes/JobApplication');
-
-var app = express();
 
 // Test the DB connection
 mongoose.connect(DB.URI);
@@ -21,6 +31,25 @@ mongoDB.on('error', console.error.bind(console, 'Connection Error'));
 mongoDB.once('open', ()=>{
   console.log('Connected to MongoDB...');
 });
+
+// setup express session
+app.use(session({
+  secret: "SomeSecretString",
+  saveUninitialized: false,
+  resave: false
+}));
+
+//initialize flash
+app.use(flash());
+
+//serialize and deserialize the user info
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -50,7 +79,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {title: 'Error'});
 });
 
 module.exports = app;
