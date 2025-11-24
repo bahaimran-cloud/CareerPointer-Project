@@ -1,15 +1,17 @@
 <%- include ../partials/header.ejs %>
 <%- include ../partials/main_nav.ejs %>
 <main class="container">
-    <% if(message.length > 0) { %>
-        <div class="alert alter danger"> <!-- Display error message if exists -->
-            <%= message %> <!-- Display error message if exists -->
-        </div>
-    <%}%>
     <div class="row">
         <div class="offset-md-4 col-md-4">
             <br></br>
             <br></br>
+            <div style="min-height: 50px;">
+                <% if(message.length > 0) { %>
+                    <div class="alert alert-danger"> 
+                        <%= message %>
+                    </div>
+                <%}%>
+            </div>
 
             <h1>Please login</h1>
             
