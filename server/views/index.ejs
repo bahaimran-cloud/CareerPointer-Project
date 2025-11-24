@@ -10,7 +10,11 @@
           <h1 class="hero-title"><%= title %></h1>
           <p class="lead">Welcome to <strong><%= title %></strong> — a small app to track your job applications. Create, edit, and remove application records easily.</p>
           <div class="mt-4">
+            <% if(typeof displayName=='string' && displayName) { %>
             <a href="/applications/add" class="btn btn-primary btn-lg me-2">Create New Application</a>
+            <% } else { %>
+            <a href="/login" class="btn btn-primary btn-lg me-2">Login to Create Applications!</a>
+            <% } %>
             <a href="/applications" class="btn btn-outline-secondary btn-lg">View Applications</a>
           </div>
         </div>

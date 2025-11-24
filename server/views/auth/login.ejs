@@ -8,6 +8,9 @@
     <%}%>
     <div class="row">
         <div class="offset-md-4 col-md-4">
+            <br></br>
+            <br></br>
+
             <h1>Please login</h1>
             
             <form method="post" autocomplete="off">
@@ -28,10 +31,12 @@
                     <a href="/register">Register here</a>
                 </fieldset>
                 <fieldset class="form-group text-right">
-                    <input type="submit" class="btn btn-success" value="Login"> <!-- Login button -->
-                    <a href="/"></a>
-                    <input type="button" class="btn btn-warning" value="Cancel"> <!-- Cancel button -->
-                    <a href="/"></a>
+                    <br>
+                    <!-- route user back to home page  for each button-->
+                    <input type="submit" class="btn btn-success" value="Login" > <!-- Login button -->
+                        <a href="/"></a>
+                    <input type="button" class="btn btn-warning" value="Cancel" onclick="location.href='/'"> <!-- Cancel button -->
+                        <a href="/"></a>
                 </fieldset>
             </form>
         </div>
