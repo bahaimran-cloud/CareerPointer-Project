@@ -25,7 +25,7 @@ router.get('/', (async (req, res, next) => {
     }
 }));
 
-router.get('/add',async(req, res, next) => {
+router.get('/add', requireAuth, async(req, res, next) => {
     try {
         res.render('JobApplications/add', {title: 'Add Job Application' , displayName: req.user ? req.user.displayName : ''});
     }
@@ -38,7 +38,7 @@ router.get('/add',async(req, res, next) => {
 
 })
 
-router.post('/add',async(req, res, next) => {
+router.post('/add', requireAuth, async(req, res, next) => {
     try {
         let newApplication = JobApplication({
             "company": req.body.company,
@@ -62,7 +62,7 @@ router.post('/add',async(req, res, next) => {
 
 });
 
-router.get('/edit/:id',async(req, res, next) => {
+router.get('/edit/:id', requireAuth, async(req, res, next) => {
     try {
         let id = req.params.id;
         const application = await JobApplication.findById(id);
@@ -76,7 +76,7 @@ router.get('/edit/:id',async(req, res, next) => {
     }
 })
 
-router.post('/edit/:id',async(req, res, next) => {
+router.post('/edit/:id', requireAuth, async(req, res, next) => {
     try {
         let id = req.params.id;
         let updateData = {
@@ -99,7 +99,7 @@ router.post('/edit/:id',async(req, res, next) => {
     }
 })
 
-router.get('/delete/:id',async(req, res, next) => {
+router.get('/delete/:id', requireAuth, async(req, res, next) => {
     try {
         let id = req.params.id;
         await JobApplication.findByIdAndDelete(id);

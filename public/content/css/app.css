@@ -1,0 +1,107 @@
+body.page-body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f7f8fa 0%, #edefef 50%, #e5e7eb 100%);
+  color: #0f172a;
+  min-height: 100vh;
+}
+
+.page-shell {
+  padding-top: 100px;
+  padding-bottom: 60px;
+}
+
+.glass-nav {
+  background: #012b52;
+  border-bottom: 2px solid #021d38;
+}
+
+.navbar .nav-link {
+  color: #e5e7eb;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #ffffff;
+}
+
+.btn-primary {
+  background: #008092;
+  border: 1px solid #006678;
+}
+
+.btn-primary:hover {
+  background: #006678;
+}
+
+.soft-btn {
+  background: #eef2f5;
+  border: 1px solid #d8dde3;
+}
+
+.section-card,
+.feature-card,
+.panel-card,
+.auth-card {
+  background: #ffffff;
+  border: 1px solid #d7dde6;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.banner {
+  background: #f5f6f8;
+  border: 1px solid #d9dde3;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.banner-content {
+  margin-bottom: 16px;
+}
+
+.banner-logo {
+  text-align: center;
+}
+
+.banner-title {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+
+
+.banner-panel {
+  background: #ffffff;
+  border: 1px solid #d7dde6;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.stat-tile {
+  background: #f1f3f6;
+  border: 1px solid #d9dde3;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.icon-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  line-height: 42px;
+  background: #e4eef2;
+}
+
+
+footer .navbar {
+  background: #012b52 !important;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .page-shell { padding-top: 90px; }
+  .banner { padding: 18px; }
+}

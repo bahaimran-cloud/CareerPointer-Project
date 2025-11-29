@@ -1,43 +1,113 @@
-<% include partials/header %> <!-- Include header partial for consistent head section -->
-<% include partials/main_nav %> <!-- Include main navigation partial -->
-<body>
-    <main class="container hero mt-5">
-      <div class="row align-items-center">
-        <div class="col-md-4 text-center">
-          <img src="/content/Careerpointerlogo.webp" alt="Team Logo" class="logo-img mb-3" />
-        </div>
-        <div class="col-md-8">
-          <h1 class="hero-title"><%= title %></h1>
-          <p class="lead">Welcome to <strong><%= title %></strong> — a small app to track your job applications. Create, edit, and remove application records easily.</p>
-          <div class="mt-4">
-            <% if(typeof displayName=='string' && displayName) { %>
-            <a href="/applications/add" class="btn btn-primary btn-lg me-2">Create New Application</a>
-            <% } else { %>
-            <a href="/login" class="btn btn-primary btn-lg me-2">Login to Create Applications!</a>
-            <% } %>
-            <a href="/applications" class="btn btn-outline-secondary btn-lg">View Applications</a>
+<% include partials/header %>
+<% include partials/main_nav %>
+<main class="page-shell container">
+  <section class="banner section-card">
+    <div class="banner-content">
+      <h1 class="banner-title mb-3">Wellcome to Career Pointer</h1>
+      <p class="lead text-muted">A website created by Ontario Tech students for Ontario Tech students. A place to list your job applications, compare your options, and see what you need to do next.</p>
+      <% if(typeof displayName=='string' && displayName) { %>
+        <a href="/applications/add" class="btn btn-primary btn-lg me-2 mb-2"><i class="fa-solid fa-bolt me-2"></i>Create application</a>
+      <% } else { %>
+        <a href="/login" class="btn btn-primary btn-lg me-2 mb-2"><i class="fa-solid fa-lock-open me-2"></i>Login to start</a>
+      <% } %>
+      <a href="/applications" class="btn btn-outline-light btn-lg text-dark border-0 soft-btn mb-2"><i class="fa-solid fa-table-list me-2"></i>View tracker</a>
+    </div>
+    <div class="banner-logo text-center">
+      <img src="/content/Careerpointerlogo.webp" alt="Career Pointer logo" style="max-width: 180px; width: 100%; height: auto;">
+    </div>
+  </section>
+
+  <section class="mt-5">
+    <div class="section-heading">
+      <h2 class="mb-2">Quick listings</h2>
+      <p class="text-muted">Apply in one click and we’ll drop it into your tracker.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="text-center mb-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Rogers-logo.png" alt="Rogers logo" style="max-width: 110px; width: 100%; height: auto;">
           </div>
+          <h5 class="mb-1">Frontend Intern</h5>
+          <p class="text-muted small mb-2">Rogers • Remote</p>
+          <p class="text-muted mb-3">Work on landing pages, basic UI tweaks, and assist with QA.</p>
+          <% if(typeof displayName==='string' && displayName) { %>
+            <button class="btn btn-primary btn-sm" data-apply data-job='{"company":"Rogers","position":"Frontend Intern","location":"Remote","jobType":"Internship"}'>Apply</button>
+          <% } else { %>
+            <a class="btn btn-outline-light text-dark border-0 soft-btn btn-sm" href="/login">Login to apply</a>
+          <% } %>
         </div>
       </div>
-      <br> </br>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="text-center mb-2">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/RBC_Royal_Bank.svg/320px-RBC_Royal_Bank.svg.png" alt="RBC logo" style="max-width: 110px; width: 100%; height: auto;">
+          </div>
+          <h5 class="mb-1">Junior QA</h5>
+          <p class="text-muted small mb-2">RBC • Toronto</p>
+          <p class="text-muted mb-3">Help test new releases, write simple test cases, and log issues.</p>
+          <% if(typeof displayName==='string' && displayName) { %>
+            <button class="btn btn-primary btn-sm" data-apply data-job='{"company":"RBC","position":"Junior QA","location":"Toronto","jobType":"Full-time"}'>Apply</button>
+          <% } else { %>
+            <a class="btn btn-outline-light text-dark border-0 soft-btn btn-sm" href="/login">Login to apply</a>
+          <% } %>
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="text-center mb-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google logo" style="max-width: 110px; width: 100%; height: auto;">
+          </div>
+          <h5 class="mb-1">Support Analyst</h5>
+          <p class="text-muted small mb-2">Google • Vancouver</p>
+          <p class="text-muted mb-3">Respond to support tickets, document fixes, and track follow-ups.</p>
+          <% if(typeof displayName==='string' && displayName) { %>
+            <button class="btn btn-primary btn-sm" data-apply data-job='{"company":"Google","position":"Support Analyst","location":"Vancouver","jobType":"Full-time"}'>Apply</button>
+          <% } else { %>
+            <a class="btn btn-outline-light text-dark border-0 soft-btn btn-sm" href="/login">Login to apply</a>
+          <% } %>
+        </div>
       </div>
     </div>
-    </main>
-</body>
-<br> </br>
-<% include partials/footer %> <!-- Include footer partial for consistent footer section -->
+  </section>
+</main>
+<% if(typeof displayName==='string' && displayName) { %>
+  <script>
+    (function() {
+      const applyButtons = document.querySelectorAll('[data-apply]');
+      const today = new Date().toISOString().split('T')[0];
+      applyButtons.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const job = JSON.parse(btn.dataset.job || '{}');
+          const formData = new URLSearchParams({
+            company: job.company || 'Unknown',
+            position: job.position || 'Applied role',
+            dateApplied: today,
+            status: 'Applied',
+            location: job.location || 'Unknown',
+            jobType: job.jobType || 'Full-time',
+            notes: 'Applied from home page quick listing.'
+          });
+          try {
+            const res = await fetch('/applications/add', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              body: formData.toString()
+            });
+            if (res.ok) {
+              alert('Successfully applied! Added to your tracker.');
+              window.location.href = '/applications';
+            } else {
+              alert('Could not apply right now. Please try again or add manually.');
+            }
+          } catch (err) {
+            alert('Network issue. Please try again.');
+          }
+        });
+      });
+    })();
+  </script>
+<% } %>
+<br></br>
+<% include partials/footer %>

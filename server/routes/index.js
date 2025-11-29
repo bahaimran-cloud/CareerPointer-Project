@@ -8,7 +8,7 @@ let User = userModel.User;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Career Pointer ' , displayName: req.user ? req.user.displayName : ''});
+  res.render('index', { title: 'Career Pointer - Home' , displayName: req.user ? req.user.displayName : ''});
 });
 
 router.get('/aboutus', function(req, res, next) {
