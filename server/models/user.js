@@ -38,6 +38,12 @@ let User = mongoose.Schema({
         default:"/content/images/default-avatar.png",
         trim:true
     },
+    oauthProvider:
+    {
+        type:String,
+        default:"",
+        trim:true
+    },
     resetToken:
     {
         type:String,

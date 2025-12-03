@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -27,14 +28,12 @@ app.use(cors({
 let userModel = require('../models/user');
 let User = userModel.User;
 
-
 var indexRouter = require('../routes/index');
 var usersRouter = require('../routes/users');
-
 let ApplicationRouter = require('../routes/JobApplication');
 
 // Test the DB connection
-mongoose.connect(DB.URI);
+mongoose.connect(process.env.MONGODB_URI || DB.URI);
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error'));
 mongoDB.once('open', ()=>{
@@ -47,7 +46,7 @@ app.use(session({
   resave: false,
   cookie: {
     secure: process.env.NODE_ENV === 'production' && process.env.USE_HTTPS === 'true',
-    sameSite: 'lax', // 'lax' works fine for same-site apps
+    sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true
   }
@@ -60,6 +59,93 @@ app.use(flash());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// Google OAuth Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL || "http://localhost:3000/auth/google/callback"
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      let user = await User.findOne({ email: profile.emails[0].value });
+      if (!user) {
+        user = await User.create({
+          username: profile.emails[0].value,
+          email: profile.emails[0].value,
+          displayName: profile.displayName,
+          avatar: profile.photos[0]?.value || '/content/images/default-avatar.png',
+          oauthProvider: 'google'
+        });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err, null);
+    }
+  }
+));
+
+// GitHub OAuth Strategy
+const GitHubStrategy = require('passport-github2').Strategy;
+passport.use(new GitHubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: process.env.GITHUB_CALLBACK_URL || "http://localhost:3000/auth/github/callback"
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      const email = profile.emails && profile.emails[0] 
+        ? profile.emails[0].value 
+        : `${profile.username}@github.local`;
+      
+      let user = await User.findOne({ email: email });
+      if (!user) {
+        user = await User.create({
+          username: profile.username,
+          email: email,
+          displayName: profile.displayName || profile.username,
+          avatar: profile.photos && profile.photos[0] 
+            ? profile.photos[0].value 
+            : '/content/images/default-avatar.png',
+          oauthProvider: 'github'
+        });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err, null);
+    }
+  }
+));
+
+// Discord OAuth Strategy
+const DiscordStrategy = require('passport-discord').Strategy;
+passport.use(new DiscordStrategy({
+    clientID: process.env.DISCORD_CLIENT_ID,
+    clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    callbackURL: process.env.DISCORD_CALLBACK_URL || "http://localhost:3000/auth/discord/callback",
+    scope: ['identify', 'email']
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      let user = await User.findOne({ email: profile.email });
+      if (!user) {
+        user = await User.create({
+          username: profile.username,
+          email: profile.email,
+          displayName: profile.username,
+          avatar: profile.avatar 
+            ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`
+            : '/content/images/default-avatar.png',
+          oauthProvider: 'discord'
+        });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err, null);
+    }
+  }
+));
 
 //initialize passport
 app.use(passport.initialize());
